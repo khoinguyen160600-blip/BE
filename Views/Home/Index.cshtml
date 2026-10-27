@@ -1,0 +1,33 @@
+﻿<!-- Khai báo kiểu dữ liệu truyền từ Controller sang -->
+@model IEnumerable<BE.Models.Product>
+
+@{
+    ViewBag.Title = "Trang chủ";
+    // Sử dụng Layout gốc dành cho Khách hàng
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center; margin: 30px 0; color: #2c3e50;">SẢN PHẨM NỔI BẬT</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+            <div style="border: 1px solid #ecf0f1; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+                <!-- Hiển thị ảnh (Dùng ảnh giả tạm thời nếu trong CSDL chưa có tên ảnh) -->
+                <img src="~/Content/Images/@item.ProductImage" alt="@item.ProductName" style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;" onerror="this.src='https://via.placeholder.com/200?text=No+Image'" />
+
+                <h4 style="margin-top: 15px; font-size: 18px; height: 40px; overflow: hidden;">@item.ProductName</h4>
+                <p style="color: #e74c3c; font-weight: bold; font-size: 16px;">
+                    @String.Format("{0:0,0}", item.ProductPrice) VNĐ
+                </p>
+
+                <!-- Nút xem chi tiết (Sẽ làm ở bước sau) -->
+                <a href="/Home/Details/@item.ProductID" style="display: inline-block; background-color: #3498db; color: white; padding: 8px 20px; text-decoration: none; border-radius: 4px; transition: 0.3s;">
+                    Xem chi tiết
+                </a>
+            </div>
+        </div>
+    }
+</div>
